@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block body %}
+    {% for products in allProducts %}
+        {% set idx = loop.index0 %}
+        <a href="{{ path('show_subcategory_product', {'categoryName':category.name, 'subcategoryName':subcategories[idx].name }) }}"><h3>{{ subcategories[idx].name }}</h3></a>
+        <table class="table table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td><a href="{{ path('show_product', {'categoryName':category.name, 'subcategoryName':subcategories[idx].name, 'productCode':product.code}) }}">{{ product.name }}</a></td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+{% endblock %}
